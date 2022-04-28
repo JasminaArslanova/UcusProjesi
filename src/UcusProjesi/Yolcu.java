@@ -1,5 +1,7 @@
 package UcusProjesi;
 
+import java.util.Locale;
+
 public class Yolcu {
     private String adSoyad;
     private int yas;
@@ -18,7 +20,7 @@ public class Yolcu {
     }
 
     public String getAdSoyad() {
-        return adSoyad;
+        return adSoyad.toUpperCase();
     }
 
     public void setAdSoyad(String adSoyad) {
@@ -26,6 +28,9 @@ public class Yolcu {
     }
 
     public int getYas() {
+        if (yas<0){
+            yas*=-1;
+        }
         return yas;
     }
 
@@ -34,7 +39,7 @@ public class Yolcu {
     }
 
     public String getLocal() {
-        return local;
+        return local.toUpperCase();
     }
 
     public void setLocal(String local) {
@@ -42,7 +47,7 @@ public class Yolcu {
     }
 
     public String getSehir() {
-        return sehir;
+        return sehir.toUpperCase();
     }
 
     public void setSehir(String sehir) {
@@ -50,7 +55,7 @@ public class Yolcu {
     }
 
     public String getUcusSekli() {
-        return ucusSekli;
+        return ucusSekli.toLowerCase();
     }
 
     public void setUcusSekli(String ucusSekli) {

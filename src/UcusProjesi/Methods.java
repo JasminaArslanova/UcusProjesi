@@ -29,9 +29,9 @@ public class Methods extends Yolcu {
 
     private static void faturaYazdir(List<Yolcu> yolcu, double biletFiyati) {
      biletFiyati=tekBiletFiyatiHesapla(yolcu,yasInd,yonInd);
-        System.out.println("==============FATURA==============");
-        System.out.println("AD/SOYAD      : "+ Methods.yolcu.get(0).getAdSoyad()+"\nLOCAL         : "+ Methods.yolcu.get(0).getLocal()+"\nNEREYE        : "+ Methods.yolcu.get(0).getSehir()
-        +"\nUCUS SEKLI    : "+ Methods.yolcu.get(0).getUcusSekli()+"\n======================================="+"\nTOPLAM BILET FIYATI   : "+ biletFiyati);
+        System.out.println("================FATURA=================");
+        System.out.println("AD/SOYAD      : "+ Methods.yolcu.get(0).getAdSoyad()+"\nNEREDEN      : "+ Methods.yolcu.get(0).getLocal()+"\nNEREYE        : "+ Methods.yolcu.get(0).getSehir()
+        +"\nUCUS SEKLI    : "+ Methods.yolcu.get(0).getUcusSekli()+"\n======================================="+"\nTOPLAM BILET FIYATI   : "+ biletFiyati+"  $");
     }
 
 
@@ -40,22 +40,19 @@ public class Methods extends Yolcu {
         yonInd=yonIndH();
         if (Methods.yolcu.get(0).getUcusSekli().equals("1")|| Methods.yolcu.get(0).getUcusSekli().equalsIgnoreCase("tek")) {
             if (Methods.yolcu.get(0).getSehir().equalsIgnoreCase("B")){
-                biletFiyati=bUcret-(bUcret*yasInd*yonInd);
+                biletFiyati=bUcret*yasInd;
                 System.out.println("B sehri biletF  "+biletFiyati);
 
             }else if(Methods.yolcu.get(0).getSehir().equalsIgnoreCase("C")){
-                biletFiyati=cUcret*yasInd*yonInd;
+                biletFiyati=cUcret*yasInd;
                 System.out.println("C sehri biletF  "+biletFiyati);
             }else if(Methods.yolcu.get(0).getSehir().equalsIgnoreCase("D")){
-                biletFiyati=dUcret*yasInd*yonInd;
+                biletFiyati=dUcret*yasInd;
                 System.out.println("D sehri biletF  "+biletFiyati);
             }
-        }else {
+        }else if (Methods.yolcu.get(0).getUcusSekli().equals("2")|| Methods.yolcu.get(0).getUcusSekli().equalsIgnoreCase("gd")){
             if (Methods.yolcu.get(0).getSehir().equalsIgnoreCase("B")){
-                //System.out.println("1 "+yasInd*b);
-                //System.out.println("2  "+yonInd);
-                biletFiyati=2*(bUcret-(bUcret*yasInd)+(bUcret*yonInd)); //50- 50*50%+50*20%  //50-  25 + 10=15
-                biletFiyati=2*(bUcret*0.50*0.80);
+                biletFiyati=(bUcret*yasInd*yonInd)*2;
                 System.out.println("B sehri biletF  "+biletFiyati);
 
             }else if(Methods.yolcu.get(0).getSehir().equalsIgnoreCase("C")){
@@ -79,17 +76,17 @@ public class Methods extends Yolcu {
     if(Methods.yolcu.get(0).getYas()<12){
         yasInd=0.50;//50%
     }else if (Methods.yolcu.get(0).getYas()<25){
-        yasInd=0.10;//10%
+        yasInd=0.90;//10%
     }else if (Methods.yolcu.get(0).getYas()>65){
-        yasInd=0.30;//%30
+        yasInd=0.70;//%30
     }else yasInd=1;
         System.out.println("yas indirimi  "+yasInd);
     return yasInd;
     }
     private static double yonIndH(){
-        if (Methods.yolcu.get(0).getUcusSekli().equals("1")|| Methods.yolcu.get(0).getUcusSekli().equals("tek")){
-            yonInd=1;
-        }else  yonInd=0.20; //20%
+        if (Methods.yolcu.get(0).getUcusSekli().equals("2")|| Methods.yolcu.get(0).getUcusSekli().equals("gd")){
+            yonInd=0.80; //20%
+        }else  yonInd=1;
         System.out.println("yon indirimi  "+yonInd);
         return yonInd;
     }
@@ -106,7 +103,6 @@ public class Methods extends Yolcu {
         String sehir=scan.nextLine();
         System.out.println("tek yon/gidis-donus?");
         String ucusSekli=scan.nextLine();
-
         Yolcu yolcumuz=new Yolcu(adSoyad,yas,local,sehir,ucusSekli);
         yolcu.add(yolcumuz);
         System.out.println("yolcu objesi  "+yolcumuz);
